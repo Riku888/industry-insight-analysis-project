@@ -107,16 +107,134 @@ top_n: 5
 
 ---
 
-### 🧠 キーワード設計の考え方
+# 🧩 キーワード設計のルール
 
-キーワードは「単語集」ではありません。
-**“視点”を定義するもの**です。
+## ❗重要ルール（必須）
 
-👉 自分に問いかけてください：
+* **1カテゴリ = 50キーワード以上**
+* 英語のみ
+* 他カテゴリと意味が被らない
+* 単語だけでなく「フレーズ」も含める
 
-> * 将来この業界で働くとしたら
-> * 上司や投資家は
-> * どんなニュースを重要だと言うか？
+### なぜ50語以上？
+
+理由は明確です：
+
+1. ニュース表現は多様
+2. 同じ意味でも言い方が違う
+3. 少ないと **分類精度が落ちる**
+4. 実務では「広く拾って、後で判断」
+
+👉 **これは検索エンジン的発想**
+
+---
+
+## 🧠 キーワードは「単語集」ではない
+
+❌ ダメな考え方
+
+> AIに作らせたからOK
+
+✅ 正しい考え方
+
+> **「このカテゴリで何を検知したいか」**を言語化する
+
+---
+
+# 🤖 キーワードを作るためのAIプロンプト（超重要）
+
+以下は **学生がそのまま使っていいサンプルプロンプト**です。
+
+---
+
+## 🔹 汎用テンプレ（コピペOK）
+
+```text
+You are a professional industry analyst.
+
+I am building a news monitoring tool using RSS feeds.
+The goal is to classify daily news articles into meaningful categories.
+
+Industry:
+[WRITE YOUR INDUSTRY]
+
+Category:
+[WRITE ONE CATEGORY NAME]
+
+Task:
+Generate at least 50 English keywords and phrases that are:
+- Commonly used in real news articles
+- Relevant to this category in a professional context
+- Likely to appear in headlines or article bodies
+- Not overlapping with other categories
+
+Include:
+- Single words
+- Multi-word phrases
+- Industry-specific terminology
+- Policy, business, and market expressions if relevant
+
+Do NOT include explanations.
+Output as a simple comma-separated list.
+```
+
+---
+
+## 🔹 具体例（ファイナンス × マクロ経済）
+
+```text
+Industry:
+US Equity Market
+
+Category:
+US macro & economy
+
+Task:
+Generate at least 50 English keywords and phrases that are commonly used in real financial news articles related to the US macroeconomic environment.
+```
+
+---
+
+## 🔹 具体例（マーケティング × 消費者行動）
+
+```text
+Industry:
+Digital Marketing
+
+Category:
+Consumer behavior
+
+Task:
+Generate at least 50 English keywords and phrases related to consumer behavior and decision-making, as used in marketing and business news.
+```
+
+---
+
+## ✅ 出力されたらやること（超重要）
+
+AIの出力を：
+
+1. そのまま使わない
+2. 1つずつ目で見る
+3. 「これはニュースで見るか？」と自問
+4. 不要なものを削除
+5. 必要なら自分で追加
+
+👉 **最終判断は人間**
+
+---
+
+# 🎓 Next Abroad プロジェクトとしての意味
+
+この作業で学生が身につけるのは：
+
+* 情報設計力
+* 業界構造理解
+* 実務レベルのリサーチ視点
+* 「AIを使いこなす力」
+
+📌 **コードを書かなくても、完全に実務スキル**
+
 
 ---
 
@@ -233,7 +351,140 @@ keywords:
 
 ---
 
-## ⑦ sources：情報源（RSS）の設定
+## ⑦ sources：情報源（RSS）の設定 📡 RSSとは何か？どうやって見つけるのか
+
+### RSSとは？
+
+**RSS（Really Simple Syndication）**とは、
+Webサイトが **「新着記事の一覧を自動配信する仕組み」**です。
+
+このツールでは：
+
+* Webサイトを毎日巡回する代わりに
+* RSSを使って **新着ニュースだけを自動取得**します
+
+📌 **重要**
+
+> RSSは「スクレイピング」ではありません
+> → サイト側が *公式に公開している* 正規の配信手段です
+
+---
+
+### 🧠 なぜRSSを使うのか？
+
+実務では：
+
+* 投資家
+* マーケター
+* リサーチャー
+* コンサルタント
+
+全員が **RSS / ニュースアグリゲーション**を使っています。
+
+理由は単純：
+
+* 情報の取りこぼしを防げる
+* 毎日同じ条件で情報が入る
+* バイアスが減る
+
+👉 **このツールは「実務の情報収集フロー」を学生用に落としたもの**
+
+---
+
+### 🔍 RSSを見つける3つの方法（重要）
+
+### 方法①：サイト名 + RSS で検索（一番簡単）
+
+Googleでこう検索：
+
+```
+Reuters RSS
+Bloomberg RSS
+site:nikkei.com RSS
+```
+
+👉 多くの場合：
+
+* `/rss`
+* `/feed`
+* `/feeds/posts/default`
+
+のようなURLが見つかります。
+
+---
+
+### 方法②：Google News RSS を使う（超おすすめ）
+
+Google News は **検索結果そのものをRSS化**できます。
+
+#### 例：
+
+「Apple × AI」に関するニュースだけ欲しい場合：
+
+```
+https://news.google.com/rss/search?q=Apple+AI&hl=en-US&gl=US&ceid=US:en
+```
+
+#### site指定も可能：
+
+```
+https://news.google.com/rss/search?q=cybersecurity+site:reuters.com
+```
+
+📌 **初心者はこれだけでもOK**
+→ 信頼できるメディアだけを抽出できる
+
+---
+
+### 方法③：サイトのフッターを見る（中級者）
+
+Webサイトの下の方に：
+
+* RSS
+* Feed
+* XML
+
+と書かれたリンクがある場合があります。
+
+---
+
+### 🇯🇵 日本メディアにもRSSはある？
+
+あります。普通にあります。
+
+### 例：
+
+* 日本経済新聞（条件付き）
+* NHK
+* ITmedia
+* ZDNet Japan
+* 日経クロステック
+
+📌 **ただし注意**
+日本語記事は：
+
+* 見出しが短い
+* 英語キーワードと混ざらない
+
+👉 **このツールでは英語RSS推奨**（世界標準）
+
+---
+
+### 🗂 sources に入れるときの考え方
+
+```yaml
+sources:
+  - name: "Reuters"
+    rss: "https://www.reuters.com/rssFeed/businessNews"
+```
+
+### 良い構成
+
+* 📰 **一般ニュース（1–2）**
+* 🧠 **専門メディア（2–4）**
+* 🏢 **企業公式ブログ（任意）**
+
+---
 
 ```yaml
 sources:
@@ -243,9 +494,7 @@ sources:
 
 ### ガイドライン
 
-* 最初は **3〜6個でOK**
 * 大手ニュース + 専門メディアを混ぜる
-* 後から増やせる
 
 ### 例（ファイナンス）
 
@@ -283,9 +532,11 @@ sources:
 
 * [ ] industry は具体的か？
 * [ ] カテゴリは 8 個以上あるか？
+* [ ] 各カテゴリ50語以上ある
 * [ ] 各カテゴリの役割を説明できるか？
 * [ ] RSS は１０個以上あるか？
 * [ ] RSS は信頼できるか？
+* [ ] なぜこの情報を追うのか語れる
 
 ---
 
