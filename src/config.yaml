@@ -1,164 +1,101 @@
-industry: "サイバーセキュリティ"
+# ============================================================
+# 🔧 基本設定（ここは全員が必ず触る）
+# ============================================================
 
-# AI要約を使うか（true/false）
+# ▼ あなたが分析したい業界名を書く
+# 例: "Cybersecurity", "Finance", "Marketing", "Healthcare", "AI"
+industry: "【ここに業界名を書く】"
+
+# ▼ AIによる要約を使うか
+# true  : DiscordにAI要約を投稿する
+# false : ニュース一覧のみ投稿する（最初は false 推奨）
 use_ai_summary: false
 
-# Discord投稿の上限件数
+# ▼ Discordに投稿するニュースの最大件数
+# 多すぎると読まれないので 3〜7 が現実的
 top_n: 5
 
-# =========================
-# キーワード分類（Security ONLY）
-# =========================
+
+# ============================================================
+# 🧠 キーワード分類（このプロジェクトの一番重要な部分）
+# ============================================================
+#
+# ルール：
+# - 1カテゴリにつき「最低20〜50個」以上のキーワードを書く
+# - すべて英語で書く（ニュースが英語だから）
+# - カテゴリ同士で意味が被らないようにする
+#
+# 目的：
+# - 記事タイトルを見て「どの話題か」を自動分類するため
+#
+
 keywords:
 
-  # 1. Ransomware / Extortion
-  ランサムウェア:
+  # ------------------------------------------------------------
+  # 🧩 カテゴリ①（例：ここに分野名を書く）
+  # このカテゴリは「何を表すのか？」を日本語で説明する
+  # ------------------------------------------------------------
+  【カテゴリ名①】:
     [
-      "ransomware","double extortion","triple extortion","ransom note","leak site",
-      "data extortion","crypto ransom","bitcoin ransom","ransom payment",
-      "lockbit","alphv","blackcat","cl0p","conti","royal","akira",
-      "play ransomware","8base","darkside","revil","maze",
-      "ransom gang","affiliate model","initial access broker",
-      "data leak","exfiltration","ransom demand","decryptor"
+      "【キーワード1】",
+      "【キーワード2】",
+      "【キーワード3】"
+      # ↑ 少なくとも20個以上追加すること
     ]
 
-  # 2. Vulnerability / CVE / Exploitation
-  脆弱性・CVE:
+
+  # ------------------------------------------------------------
+  # 🧩 カテゴリ②
+  # 例：業界内の別テーマ・別視点
+  # ------------------------------------------------------------
+  【カテゴリ名②】:
     [
-      "vulnerability","cve","zero-day","0day","n-day","patch","unpatched",
-      "security flaw","critical flaw","exploit","proof of concept","poc",
-      "remote code execution","rce","privilege escalation","lpe",
-      "buffer overflow","use-after-free","heap overflow",
-      "memory corruption","deserialization","command injection",
-      "sql injection","xss","ssrf","directory traversal","path traversal",
-      "out-of-bounds","integer overflow","sandbox escape"
+      "【キーワード1】",
+      "【キーワード2】",
+      "【キーワード3】"
     ]
 
-  # 3. Malware / Backdoor / Botnet
-  マルウェア:
+
+  # ------------------------------------------------------------
+  # 🧩 カテゴリ③（必要な数だけ増やしてOK）
+  # ------------------------------------------------------------
+  【カテゴリ名③】:
     [
-      "malware","trojan","backdoor","spyware","keylogger","dropper",
-      "loader","payload","botnet","command and control","c2",
-      "beaconing","persistence","lateral movement","credential harvesting",
-      "infostealer","stealer","banking trojan","rootkit",
-      "remote access trojan","rat","dll sideloading","process injection",
-      "living off the land","lolbins","fileless malware","obfuscation",
-      "packer","malicious code"
+      "【キーワード1】",
+      "【キーワード2】"
     ]
 
-  # 4. Phishing / Social Engineering
-  フィッシング:
-    [
-      "phishing","spear phishing","whaling","business email compromise","bec",
-      "email fraud","spoofing","impersonation","social engineering",
-      "credential phishing","password harvesting","fake login",
-      "malicious attachment","malicious link","qr phishing","smishing",
-      "vishing","typosquatting","homoglyph","lookalike domain",
-      "brand impersonation","oauth abuse","consent phishing",
-      "invoice fraud","payment fraud","scam campaign","fraud scheme"
-    ]
 
-  # 5. Identity / IAM / Authentication
-  ID・認証:
-    [
-      "identity","iam","identity access management","authentication",
-      "authorization","single sign-on","sso","multi-factor authentication","mfa",
-      "passwordless","credentials","credential theft","account takeover",
-      "oauth","openid","saml","token","access token","refresh token",
-      "session hijacking","cookie theft","pass-the-hash","pass-the-ticket",
-      "kerberos","active directory","azure ad","entra id",
-      "identity compromise","directory services"
-    ]
+# ============================================================
+# 📰 情報源（RSSフィード）
+# ============================================================
+#
+# ルール：
+# - 信頼できるメディアのみ使う
+# - 最低5個以上、できれば10〜15個
+# - Google News RSS を使うと簡単
+#
+# 探し方：
+# - site:example.com + 業界キーワード
+# - Google News → 検索 → RSS
+#
 
-  # 6. Cloud / SaaS / Supply Chain
-  クラウド・サプライチェーン:
-    [
-      "cloud security","aws security","azure security","gcp security",
-      "kubernetes","k8s","container security","docker","helm",
-      "supply chain attack","software supply chain","dependency confusion",
-      "typosquatting package","malicious package","npm","pypi","pip",
-      "ci/cd","github actions","gitlab","devops security","iac",
-      "terraform","cloud misconfiguration","public bucket","exposed bucket",
-      "secrets exposure","api key leak","third-party breach"
-    ]
-
-  # 7. Nation-State / APT / Cyber Espionage
-  APT・国家系:
-    [
-      "apt","advanced persistent threat","nation-state","state-sponsored",
-      "cyber espionage","espionage campaign","intelligence service",
-      "apt28","apt29","apt41","lazarus","sandworm","cozy bear","fancy bear",
-      "chinese hackers","north korean hackers","iranian hackers","russian hackers",
-      "espionage malware","strategic targeting","government-backed",
-      "cyber warfare","information warfare","influence operation",
-      "critical infrastructure attack","infrastructure targeting"
-    ]
-
-  # 8. Defense / Detection / Response
-  防御・検知・対応:
-    [
-      "incident response","ir","forensics","digital forensics",
-      "threat detection","threat hunting","soc","security operations center",
-      "siem","soar","edr","xdr","ndr","ids","ips",
-      "behavioral detection","anomaly detection","telemetry",
-      "log analysis","alert fatigue","incident containment",
-      "remediation","eradication","post-incident review","blue team",
-      "purple team","defensive security","security monitoring"
-    ]
-
-  # 9. Regulation / Policy / Compliance (Security-focused)
-  規制・ガバナンス:
-    [
-      "cyber regulation","security regulation","compliance","gdpr",
-      "nist","nist framework","iso 27001","iso 27002",
-      "cisa","nsa","fbi warning","government advisory",
-      "security mandate","executive order","data protection law",
-      "privacy regulation","incident disclosure","breach notification",
-      "security audit","risk management","cyber risk",
-      "governance","security policy","compliance failure",
-      "regulatory fine","enforcement action"
-    ]
-
-# =========================
-# 情報源（RSS）
-# =========================
 sources:
-  - name: "Reuters"
-    rss: "https://news.google.com/rss/search?q=cybersecurity+site:reuters.com&hl=en-US&gl=US&ceid=US:en"
 
-  - name: "AP News"
-    rss: "https://news.google.com/rss/search?q=cybersecurity+site:apnews.com&hl=en-US&gl=US&ceid=US:en"
+  # ------------------------------------------------------------
+  # 情報源①
+  # ------------------------------------------------------------
+  - name: "【メディア名①】"
+    rss: "【ここにRSSのURL】"
 
-  - name: "The Hacker News"
-    rss: "https://feeds.feedburner.com/TheHackersNews"
+  # ------------------------------------------------------------
+  # 情報源②
+  # ------------------------------------------------------------
+  - name: "【メディア名②】"
+    rss: "【ここにRSSのURL】"
 
-  - name: "BleepingComputer"
-    rss: "https://www.bleepingcomputer.com/feed/"
-
-  - name: "SecurityWeek"
-    rss: "https://www.securityweek.com/feed/"
-
-  - name: "Dark Reading"
-    rss: "https://www.darkreading.com/rss.xml"
-
-  - name: "The Record"
-    rss: "https://therecord.media/feed/"
-
-  - name: "Microsoft Security Blog"
-    rss: "https://www.microsoft.com/en-us/security/blog/feed/"
-
-  - name: "Google Security Blog"
-    rss: "https://security.googleblog.com/feeds/posts/default"
-
-  - name: "Cisco Talos"
-    rss: "https://blog.talosintelligence.com/feeds/posts/default"
-
-  - name: "Palo Alto Unit 42"
-    rss: "https://unit42.paloaltonetworks.com/feed/"
-
-  - name: "CrowdStrike"
-    rss: "https://www.crowdstrike.com/blog/feed/"
-
-  - name: "CISA"
-    rss: "https://www.cisa.gov/cybersecurity-advisories/all.xml"
-
+  # ------------------------------------------------------------
+  # 情報源③（必要な数だけ追加OK）
+  # ------------------------------------------------------------
+  - name: "【メディア名③】"
+    rss: "【ここにRSSのURL】"
