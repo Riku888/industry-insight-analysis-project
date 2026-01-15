@@ -107,9 +107,9 @@ top_n: 5
 
 ---
 
-# 🧩 キーワード設計のルール
+### 🧩 キーワード設計のルール
 
-## ❗重要ルール（必須）
+### ❗重要ルール（必須）
 
 * **1カテゴリ = 50キーワード以上**
 * 英語のみ
@@ -129,25 +129,19 @@ top_n: 5
 
 ---
 
-## 🧠 キーワードは「単語集」ではない
-
-❌ ダメな考え方
-
-> AIに作らせたからOK
-
-✅ 正しい考え方
+### 🧠 キーワードは「単語集」ではない
 
 > **「このカテゴリで何を検知したいか」**を言語化する
 
 ---
 
-# 🤖 キーワードを作るためのAIプロンプト（超重要）
+### 🤖 キーワードを作るためのAIプロンプト（超重要）
 
 以下は **学生がそのまま使っていいサンプルプロンプト**です。
 
 ---
 
-## 🔹 汎用テンプレ（コピペOK）
+### 🔹 汎用テンプレ（コピペOK）
 
 ```text
 You are a professional industry analyst.
@@ -177,10 +171,19 @@ Include:
 Do NOT include explanations.
 Output as a simple comma-separated list.
 ```
+### 🧩 基本テンプレ
 
+```yaml
+keywords:
+
+  CATEGORY NAME:
+    [
+      "keyword1","keyword2","keyword3","keyword4","keyword5"
+    ]
+```
 ---
 
-## 🔹 具体例（ファイナンス × マクロ経済）
+### 🔹 具体例（ファイナンス × マクロ経済）
 
 ```text
 Industry:
@@ -195,7 +198,7 @@ Generate at least 50 English keywords and phrases that are commonly used in real
 
 ---
 
-## 🔹 具体例（マーケティング × 消費者行動）
+### 🔹 具体例（マーケティング × 消費者行動）
 
 ```text
 Industry:
@@ -210,7 +213,7 @@ Generate at least 50 English keywords and phrases related to consumer behavior a
 
 ---
 
-## ✅ 出力されたらやること（超重要）
+### ✅ 出力されたらやること（超重要）
 
 AIの出力を：
 
@@ -221,133 +224,6 @@ AIの出力を：
 5. 必要なら自分で追加
 
 👉 **最終判断は人間**
-
----
-
-# 🎓 Next Abroad プロジェクトとしての意味
-
-この作業で学生が身につけるのは：
-
-* 情報設計力
-* 業界構造理解
-* 実務レベルのリサーチ視点
-* 「AIを使いこなす力」
-
-📌 **コードを書かなくても、完全に実務スキル**
-
-
----
-
-### 📐 設計ルール（必ず守る）
-
-1. カテゴリーは **3〜6個**
-2. 1カテゴリー = 1つの関心テーマ
-3. 英語のみ（海外ニュース対応）
-4. 他カテゴリと意味が被らない
-
----
-
-### 🧩 基本テンプレ
-
-```yaml
-keywords:
-
-  CATEGORY NAME:
-    [
-      "keyword1","keyword2","keyword3","keyword4","keyword5"
-    ]
-```
-
----
-
-## ⑤ 実例①：マーケティング専攻の学生
-
-### 🎯 ゴール
-
-> 将来、**デジタルマーケティング職**として
-> プラットフォーム変化と消費者行動を理解したい
-
-```yaml
-industry: "Digital Marketing"
-
-use_ai_summary: false
-top_n: 5
-
-keywords:
-
-  Consumer behavior:
-    [
-      "consumer behavior","purchase intent","brand perception",
-      "customer journey","user engagement","conversion rate"
-    ]
-
-  Platform strategy:
-    [
-      "google ads","meta ads","tiktok marketing",
-      "algorithm change","platform update","ad targeting"
-    ]
-
-  Brand & growth:
-    [
-      "brand strategy","brand loyalty","user acquisition",
-      "growth strategy","market penetration"
-    ]
-
-  Regulation & privacy:
-    [
-      "privacy regulation","cookie restriction",
-      "data privacy","tracking limitation","gdpr"
-    ]
-```
-
-📌 **この学生が語れること**
-
-> 「私は広告テクニックよりも、
-> プラットフォーム構造と消費者心理の変化を追う設計にしました」
-
----
-
-## ⑥ 実例②：ファイナンス / 投資志望の学生
-
-### 🎯 ゴール
-
-> S&P500 への投資判断に役立つ
-> **マクロ × 企業 × バリュエーション**を追う
-
-```yaml
-industry: "US Equity Market"
-
-use_ai_summary: false
-top_n: 5
-
-keywords:
-
-  Macro economy:
-    [
-      "economic growth","recession risk","inflation trend",
-      "labor market","consumer spending"
-    ]
-
-  Monetary policy:
-    [
-      "federal reserve","interest rate","rate cut",
-      "rate hike","liquidity condition"
-    ]
-
-  Valuation & expectations:
-    [
-      "valuation","forward pe","earnings expectations",
-      "multiple expansion","risk premium"
-    ]
-
-  Corporate earnings:
-    [
-      "earnings report","revenue growth","profit margin",
-      "guidance update","earnings surprise"
-    ]
-```
-
-📌 **これ、普通に投資会社の新人研修レベル**
 
 ---
 
